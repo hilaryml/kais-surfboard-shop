@@ -7,23 +7,16 @@ export default class Surfboards extends Component {
     super(props)
 
     this.state = {
-      errors: []
+
     }
 
   }
 
   handleInputChange(event) {
-    const { value, type, name } = event.target
-
-    if (name === 'length' && +value >= 100) {
-      return this.setState({
-        errors: [{ message: 'Inventory must be less than 100'}]
-      })
-    }
+    const { value, name } = event.target
 
     this.setState({
-      name: value,
-      errors: []
+      [name]: value,
     })
   }
 
@@ -31,14 +24,9 @@ export default class Surfboards extends Component {
 
     console.log(this.state)
 
-    const errors = this.state.errors.map((error, index) => (
-      <div style={{color: 'red'}}>{error.message}</div>
-    ))
 
     return (
       <form>
-
-        {errors}
 
         <div className="input-group">
           <input
@@ -46,7 +34,7 @@ export default class Surfboards extends Component {
             type="text"
             name="name"
             onChange={(event) => this.handleInputChange(event)}
-            placeholder="Surfboard Name" />
+            placeholder="Name" />
         </div>
 
         <div className="input-group">
@@ -55,9 +43,26 @@ export default class Surfboards extends Component {
             type="number"
             name="length"
             onChange={(event) => this.handleInputChange(event)}
-            placeholder="Surfboard Length" />
+            placeholder="Length" />
         </div>
 
+        <div className="input-group">
+          <input
+            className="add-surfboard-field"
+            type="number"
+            name="price"
+            onChange={(event) => this.handleInputChange(event)}
+            placeholder="Price" />
+        </div>
+
+        <div className="input-group">
+          <input
+            className="add-surfboard-field"
+            type="number"
+            name="quantity"
+            onChange={(event) => this.handleInputChange(event)}
+            placeholder="Quantity" />
+        </div>
       </form>
     )
   }
