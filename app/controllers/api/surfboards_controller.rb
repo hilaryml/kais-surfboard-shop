@@ -29,7 +29,7 @@ class Api::SurfboardsController < ApplicationController
   private
 
   def surfboard_params
-    params.require(:surfboard).permit(:name, :lenth, :price, :quantity, category_ids: [])
+    params.require(:surfboard).permit(:name, :length, :price, :quantity, category_ids: [])
   end
 
 end
