@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router'
 
 export default class Surfboards extends Component {
 
@@ -7,7 +8,7 @@ export default class Surfboards extends Component {
     super(props)
 
     this.state = {
-      surfboards = []
+      surfboards: []
     }
   }
 
@@ -20,23 +21,28 @@ export default class Surfboards extends Component {
       },
     })
       .then(response => response.json())
-      .then(data => console.log(data))
+      .then(data => this.setState({ surfboards: data }))
       .catch(err => console.log(err))
   }
 
   render() {
 
-    cont surfboards = this.state.surfboards.map((surfboard) =>
+    const surfboards = this.state.surfboards.map((surfboard) =>
 
-      <div>
-        <hi>{surfboard.name}</h1>
+      <div key={surfboard.id}>
+        <h1>{surfboard.name}</h1>
         <p>Length: {surfboard.length} | Price: {surfboard.price} | Quantity: {surfboard.quantity}
         </p>
       </div>
     )
 
     return (
-      <div>Surfboards Component is coming</div>
+      <div>
+        <h1>Surfboard Inventory</h1>
+        <Link to="/surfboards/new">Add A Surfboard</Link>
+        {this.props.children}
+        {surfboards}
+      </div>
     )
   }
 }
