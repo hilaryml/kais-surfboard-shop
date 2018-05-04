@@ -20,6 +20,17 @@ export default class Surfboards extends Component {
     })
   }
 
+  handleOnClick(event) {
+    event.preventDefault
+
+    fetch('/api/surfboards', {
+      method: 'POST',
+      data: { surfboard: this.state }
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+  }
+
   render() {
 
     console.log(this.state)
@@ -62,6 +73,14 @@ export default class Surfboards extends Component {
             name="quantity"
             onChange={(event) => this.handleInputChange(event)}
             placeholder="Quantity" />
+        </div>
+
+        <div className="input-group">
+          <input
+            className="add-surfboard-button"
+            type="submit"
+            value="Create Surfboard"
+            onClick={(event) => this.handleInputChange(event)} />
         </div>
       </form>
     )
