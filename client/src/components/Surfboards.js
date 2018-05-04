@@ -40,8 +40,7 @@ export default class Surfboards extends Component {
       <div>
         <h1>Surfboard Inventory</h1>
         <Link to="/surfboards/new">Add A Surfboard</Link>
-        {this.props.children}
-        {surfboards}
+        {this.props.children || surfboards}
       </div>
     )
   }
