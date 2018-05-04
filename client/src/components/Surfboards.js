@@ -10,9 +10,15 @@ export default class Surfboards extends Component {
     this.state = {
       surfboards: []
     }
+
+    this.fetchSurfboards = this.fetchSurfboards.bind(this)
   }
 
   componentDidMount() {
+    this.fetchSurfboards()
+  }
+
+  fetchSurfboards() {
     return fetch('/api/surfboards', {
       method: 'GET',
       headers: {
@@ -27,6 +33,11 @@ export default class Surfboards extends Component {
 
   render() {
 
+    const childrenWithProps = React.Children.map(this.props.children, (child) =>
+    React.cloneElement(child, {
+      fetchSurfboards: this.fetchSurfboards
+    }))
+
     const surfboards = this.state.surfboards.map((surfboard) =>
 
       <div key={surfboard.id}>
@@ -40,7 +51,7 @@ export default class Surfboards extends Component {
       <div>
         <h1>Surfboard Inventory</h1>
         <Link to="/surfboards/new">Add A Surfboard</Link>
-        {this.props.children || surfboards}
+        {childrenWithProps || surfboards}
       </div>
     )
   }
